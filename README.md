@@ -1,4 +1,4 @@
-﻿***How it works***
+***How it works***
 
 Using the Gmail API and Pub Sub API by Google, the model listens for activity in the inbox using the Pub Sub API. 
 
@@ -72,7 +72,7 @@ Then, you need to create a service account for the Pub-Sub API and add its corre
 
 Once you have the required credential files, you must determine the different labels that you will sort your email into. You must also decide what numerical labels you will use in the program. The labels that I started with were Normal, Interpersonal, Promotional, and College, and their corresponding numerical labels were 0, 1, 2, and 3. All of these labels and numerical labels must be held constant throughout the program.
 
-Create these labels in Gmail and label all of the emails you can with your desired labels (one per email and no label for normal mails). Also find the name of the label that google recognizes (you can find this using the “labels.list” documentation on the Gmail API website and use the trial option to see what all of the labels are named (Inbox is always “INBOX”). 
+Create these labels in Gmail and label all of the emails you can with your desired labels (one per email and no label for normal mails). Also find the name of the label that google recognizes (you can find this using the “labels.list” documentation on the Gmail API website and use the trial option to see what all of the labels are named (Inbox is always “INBOX”). Once you do that, paste the names in new variables as strings in the file "CreateService". Then you can import these variables to all of the files that need the labels (cleanSlate, trainingDataCreation, LDAtrainingDataCreation, final_function) (delete mine from the import statements section)
 
 For ease of use, assign these names to variables that correspond to the intended labels in the “LDAtrainingDataCreation” file, the “Final_function” file (close to the end of the file), the “cleanSlate” file, and the “trainingDataCreation” file.
 
