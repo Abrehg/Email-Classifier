@@ -1,13 +1,10 @@
 from CreateService import gmailServiceCreate
+from CreateService import College, Promo, Inter
 import pandas as pd
 from text_parsing import normalize_text
 import os
 
 service = gmailServiceCreate()
-
-college = "Label_2759360573854140636"
-interpersonal = "Label_267554376139622606"
-promotional = "Label_4549946469515729599"
 
 def search_inbox(service):
     result = service.users().messages().list(userId='me', maxResults=20000).execute()
@@ -67,7 +64,7 @@ while sent < len(SentResult):
 SentId.pop(0)
 print("SentId created")
 
-InterResult = search_messages(service, interpersonal)
+InterResult = search_messages(service, Inter)
 inter = 0
 InterId = ["Inter"]
 while inter < len(InterResult):
@@ -76,7 +73,7 @@ while inter < len(InterResult):
 InterId.pop(0)
 print("InterId created")
 
-CollegeResult = search_messages(service, college)
+CollegeResult = search_messages(service, College)
 college = 0
 CollegeId = ["college"]
 while college < len(CollegeResult):
@@ -85,7 +82,7 @@ while college < len(CollegeResult):
 CollegeId.pop(0)
 print("CollegeId created")
 
-PromoResult = search_messages(service, promotional)
+PromoResult = search_messages(service, Promo)
 promo = 0
 PromoId = ["Promo"]
 while promo < len(PromoResult):
