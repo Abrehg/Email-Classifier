@@ -1,6 +1,7 @@
 import pickle
 from text_parsing import normalize_text
 from CreateService import gmailServiceCreate
+from CreateService import College, Inter, Promo
 import gensim
 import gensim.corpora as corpora
 import pandas as pd
@@ -61,6 +62,12 @@ filename = 'finalized_model.sav'
 loaded_model = pickle.load(open(filename, 'rb'))
 print("models loaded")
 """
+Possible Labels: 
+0 = Normal
+1 = Interpersonal
+2 = Promotional
+3 = College
+
 AllId parts:
 0 : Id,
 1 : Sender,
@@ -72,6 +79,7 @@ AllId parts:
 """
 
 def Main_Function():
+  current_time()
   email = [0, "Fill", "Fill", 0, "Fill", 0, 0]
 
   id_result = search_inbox(service)
@@ -191,20 +199,18 @@ def Main_Function():
   print(f"predicted class: {result[0]}")
 
   classification = result[0]
-  college = "Label_2759360573854140636"
-  interpersonal = "Label_267554376139622606"
-  promotional = "Label_4549946469515729599"
 
   if classification == 1:
-      add_label(service, id, interpersonal)
-      #trash_message(service, id)
+      add_label(service, id, Inter)
+      trash_message(service, id)
 
-  elif classification == 2:
-      add_label(service, id, promotional)
-      #trash_message(service, id)
+  elif classification== 2:
+      add_label(service, id, Promo)
+      trash_message(service, id)
 
   elif classification == 3:
-      add_label(service, id, college)
-      #remove_label(service, id, "INBOX")
+      add_label(service, id, College)
+      remove_label(service, id, "INBOX")
 
+  current_time()
   return None
