@@ -29,12 +29,12 @@ def remove_label(service, message_id, label_Id):
 
 Inbox = "INBOX"
 
-Inter = "Label_2675543761396222606"
+Inter = "Label_267554376139622606"
 Inter_Result = search_messages(service, Inter)
 j = 0
 Inter_Id = []
-while j < len(Inter_Result["messages"]):
-    Inter_Id.append(Inter_Result["messages"][j]["id"])
+while j < len(Inter_Result):
+    Inter_Id.append(Inter_Result[j]["id"])
     j = j + 1
 
 for id in Inter_Id:
@@ -44,8 +44,8 @@ Promo = "Label_4549946469515729599"
 Promo_Result = search_messages(service, Promo)
 j = 0
 Promo_Id = []
-while j < len(Promo_Result["messages"]):
-    Promo_Id.append(Promo_Result["messages"][j]["id"])
+while j < len(Promo_Result):
+    Promo_Id.append(Promo_Result[j]["id"])
     j = j + 1
 
 for id in Promo_Id:
@@ -55,8 +55,8 @@ College = "Label_2759360573854140636"
 College_Result = search_messages(service, College)
 j = 0
 College_Id = []
-while j < len(College_Result["messages"]):
-    College_Id.append(College_Result["messages"][j]["id"])
+while j < len(College_Result):
+    College_Id.append(College_Result[j]["id"])
     j = j + 1
 
 for id in College_Id:
