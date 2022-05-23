@@ -1,4 +1,5 @@
 from CreateService import gmailServiceCreate
+from CreateService import Inter, Promo, College
 
 service = gmailServiceCreate()
 
@@ -29,7 +30,6 @@ def remove_label(service, message_id, label_Id):
 
 Inbox = "INBOX"
 
-Inter = "Label_267554376139622606"
 Inter_Result = search_messages(service, Inter)
 j = 0
 Inter_Id = []
@@ -40,7 +40,6 @@ while j < len(Inter_Result):
 for id in Inter_Id:
     trash_message(service, id)
 
-Promo = "Label_4549946469515729599"
 Promo_Result = search_messages(service, Promo)
 j = 0
 Promo_Id = []
@@ -51,7 +50,6 @@ while j < len(Promo_Result):
 for id in Promo_Id:
     trash_message(service, id)
 
-College = "Label_2759360573854140636"
 College_Result = search_messages(service, College)
 j = 0
 College_Id = []
