@@ -1,4 +1,5 @@
 from CreateService import gmailServiceCreate
+from CreateService import Inter, Promo, College
 import pandas as pd
 from text_parsing import normalize_text
 import gensim
@@ -71,7 +72,7 @@ while sent < len(SentResult):
 SentId.pop(0)
 print("SentId created")
 
-InterResult = search_messages(service, interpersonal)
+InterResult = search_messages(service, Inter)
 inter = 0
 InterId = ["Inter"]
 while inter < len(InterResult):
@@ -80,7 +81,7 @@ while inter < len(InterResult):
 InterId.pop(0)
 print("InterId created")
 
-CollegeResult = search_messages(service, college)
+CollegeResult = search_messages(service, College)
 college = 0
 CollegeId = ["college"]
 while college < len(CollegeResult):
@@ -89,7 +90,7 @@ while college < len(CollegeResult):
 CollegeId.pop(0)
 print("CollegeId created")
 
-PromoResult = search_messages(service, promotional)
+PromoResult = search_messages(service, Promo)
 promo = 0
 PromoId = ["Promo"]
 while promo < len(PromoResult):
