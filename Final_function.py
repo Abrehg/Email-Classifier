@@ -1,7 +1,7 @@
 import pickle
 from text_parsing import normalize_text
 from CreateService import gmailServiceCreate
-from CreateService import College, Inter, Promo
+from CreateService import College, Inter, Promo, Sent
 import gensim
 import gensim.corpora as corpora
 import pandas as pd
@@ -56,6 +56,18 @@ def add_label(service, message_id, label_Id):
     post_data = {"addLabelIds": [label_Id]}
     result = service.users().messages().modify(userId='me', id=message_id, body=post_data).execute()
 
+def searchSentMessage(service, label):
+    result = service.users().messages().list(userId='me',labelIds=label, maxResults=1).execute()
+    messages = [ ]
+    if 'messages' in result:
+        messages.extend(result['messages'])
+    while 'nextPageToken' in result:
+        page_token = result['nextPageToken']
+        result = service.users().messages().list(userId='me',labelIds=label, maxResults=20000, pageToken=page_token).execute()
+        if 'messages' in result:
+            messages.extend(result['messages'])
+    return messages
+
 lda = gensim.models.LdaModel.load("LDAModel.pickle")
 
 filename = 'finalized_model.sav'
@@ -85,6 +97,10 @@ def Main_Function():
   id_result = search_inbox(service)
   email[0] = id_result[0]["id"]
   print("Id retrieved")
+  label = id_result[0]["labelIds"]
+  for i in label:
+      if i == Sent:
+          break
 
   h = 0
   message = read_message(service, email[0])
@@ -125,7 +141,7 @@ def Main_Function():
             email[1] = maximum
          maximum = maximum + 1
       if type(email[1]) == str:
-         sender.append(email[1])
+         sender.concat([sender,email[1]])
          email[1] = maximum
 
       data = pd.DataFrame(data=sender)
@@ -202,15 +218,14 @@ def Main_Function():
 
   if classification == 1:
       add_label(service, id, Inter)
-      trash_message(service, id)
+      #trash_message(service, id)
 
   elif classification== 2:
       add_label(service, id, Promo)
-      trash_message(service, id)
+      #trash_message(service, id)
 
   elif classification == 3:
       add_label(service, id, College)
-      remove_label(service, id, "INBOX")
+      #remove_label(service, id, "INBOX")
 
   current_time()
-  return None

@@ -27,6 +27,7 @@ def trash_message(service, message_id):
 def remove_label(service, message_id, label_Id):
     post_data = {"removeLabelIds": [label_Id]}
     result = service.users().messages().modify(userId='me', id=message_id, body=post_data).execute()
+    print(f"Label {label_Id} removed from Message Id: {message_id}.")
 
 Inbox = "INBOX"
 

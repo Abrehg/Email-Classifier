@@ -244,7 +244,7 @@ if file_exists == True:
            maximum = maximum + 1
        if type(AllId[1][i]) == str:
            newSender = pd.DataFrame([AllId[1][i]])
-           sender.append(newSender, ignore_index=True)
+           sender.concat([sender,newSender], ignore_index=True)
            AllId[1][i] = maximum
        i = i + 1
     os.remove("Sender.csv")
@@ -297,5 +297,8 @@ print("dataset created")
 
 print(data)
 
-data.to_csv("LDA_Data.csv")
-print("Dataset converted to csv file")
+os.remove("LDA_Data.csv")
+#Orig_data = pd.read_csv("LDA_data.csv")
+#Fin_data = pd.concat([Orig_data,data])
+Fin_data = data
+Fin_data.to_csv("LDA_Data.csv")

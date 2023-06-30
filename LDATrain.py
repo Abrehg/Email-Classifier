@@ -10,9 +10,9 @@ from gensim.models.coherencemodel import CoherenceModel
 #data collection
 data = pd.read_csv("LDA_Data.csv")
 data = data.drop(columns=['Id', 'Has_Emoji', 'Class', 'Sender', 'Unnamed: 0'], axis=1)
-data = data.drop(labels=[], axis=0)
+data = data.drop(labels=[376, 385, 625, 881, 1104, 1344, 2223, 2428, 2467, 2723, 2916, 3077, 3254, 3423, 3573, 3731, 3869, 3921, 3997, 4004, 4152, 4335, 4505, 4661, 4803, 4934, 5091, 5206, 5207, 5208, 5285, 5438, 5686, 5779, 8034, 8171, 8846, 9368, 10191, 10192, 10193, 12067, 12089, 13374, 14136, 14433, 14506, 15017, 15195, 15210, 15221, 15283, 15299, 15316, 15550, 15551, 15552, 15553, 15680], axis=0)
 
-indexes = []
+indexes = [376, 385, 625, 881, 1104, 1344, 2223, 2428, 2467, 2723, 2916, 3077, 3254, 3423, 3573, 3731, 3869, 3921, 3997, 4004, 4152, 4335, 4505, 4661, 4803, 4934, 5091, 5206, 5207, 5208, 5285, 5438, 5686, 5779, 8034, 8171, 8846, 9368, 10191, 10192, 10193, 12067, 12089, 13374, 14136, 14433, 14506, 15017, 15195, 15210, 15221, 15283, 15299, 15316, 15550, 15551, 15552, 15553, 15680]
 emoji = 0
 S = 0
 output = ""
@@ -47,24 +47,25 @@ texts = InputData
 # Term Document Frequency
 corpus = [Dictionary.doc2bow(text) for text in texts]
 
-# number of topics (works)
-num_topics = 10
+# number of topics
+num_topics = 20
 
-# Build LDA model (makes code run again and pulls runtime error)
+# Build LDA model
 lda_model = gensim.models.LdaModel(corpus=corpus,
                                        id2word=Dictionary,
                                        num_topics=num_topics,
                                        alpha = 'auto',
                                        random_state = 42,
-                                       passes = 20)
+                                       passes = 200)
 
 
 # Print the Keyword in the 10 topics
 doc_lda = lda_model[corpus]
 # Save model to disk. (modify it to save as a separate file instead of a path)
 lda_model.save("LDAModel.pickle")
+
 """
-Run this to find the optimal number of topics for model
+#Run this to find the optimal number of topics for model
 print("optimization process started")
 num_keywords = 15
 num_topics = list(range(21)[1:])
