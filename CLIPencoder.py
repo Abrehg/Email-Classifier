@@ -14,7 +14,7 @@ def textEncoder():
         return X
 
     def encoderLayer(inputs):
-        X = tfl.MultiHeadAttention(num_heads=16, key_dim=1024, dropout=0.3)(inputs, inputs)
+        X = tfl.MultiHeadAttention(num_heads=16, key_dim=units, dropout=0.3)(inputs, inputs)
         X = tf.cast(X, dtype=tf.float32)
         inputs = tf.cast(inputs, dtype=tf.float32)
         X = tf.add(X, inputs)
